@@ -8,16 +8,16 @@ let avalibleUpgrades = {
   moose: {
     name: 'Moose',
     type: 'clickModifier',
-    effect: 1,
+    effect: .1,
     baseCost: 15,
     cost: 15
   },
   bear: {
     name: 'bear',
     type: 'clickModifier',
-    effect: 5,
-    baseCost: 100,
-    cost: 100
+    effect: 1,
+    baseCost: 1000,
+    cost: 1000
   },
   floatPlane: {
     name: 'Float Plane',
@@ -30,8 +30,8 @@ let avalibleUpgrades = {
     name: 'Village',
     type: 'autoClicker',
     effect: 5,
-    baseCost: 50,
-    cost: 50
+    baseCost: 500,
+    cost: 500
   }
 }
 
@@ -135,7 +135,7 @@ function addPerSecond() {
   for (const [key, value] of Object.entries(obtainedUpgrades)) {
     let upgrade = avalibleUpgrades[key]
     if (upgrade.type == 'autoClicker') {
-      alaskas += upgrade.effect * value;
+      alaskas += upgrade.effect * value * apc;
     }
   }
   aps = alaskas - lastCookies;
