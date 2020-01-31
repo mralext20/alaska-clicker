@@ -44,12 +44,12 @@ let obtainedUpgrades = {
 
 function buyUpgrade(upgradeType) {
   let upgrade = avalibleUpgrades[upgradeType]
-  if (upgrade.baseCost > alaskas) {
+  if (upgrade.cost > alaskas) {
     return
   }
   obtainedUpgrades[upgradeType]++
   alaskas -= upgrade.cost
-  upgrade.cost = Math.floor(upgrade.baseCost * (obtainedUpgrades[upgradeType] * .05 + 1));
+  upgrade.cost = Math.floor(upgrade.baseCost * (obtainedUpgrades[upgradeType] * .5 + 1));
   if (upgrade.type == 'clickModifier') {
 
     apc += upgrade.effect;
@@ -88,9 +88,25 @@ function drawUpgrades() {
 
 }
 
+let costSpan = {
+  moose: document.getElementById('Moose-cost'),
+  bear: document.getElementById('Bear-cost'),
+  floatPlanes: document.getElementById('Float Planes-cost'),
+  villages: document.getElementById('villages-cost'),
+}
+
+function drawCosts() {
+  costSpan.moose.textContent = avalibleUpgrades.moose.cost.toString();
+  costSpan.bear.textContent = avalibleUpgrades.bear.cost.toString();
+  costSpan.floatPlanes.textContent = avalibleUpgrades.floatPlane.cost.toString();
+  costSpan.villages.textContent = avalibleUpgrades.village.cost.toString();
+
+}
+
 function drawAll() {
   drawUpgrades()
   drawCount()
+  drawCosts()
 }
 
 let lastCookies = 0;
@@ -106,5 +122,5 @@ function addPerSecond() {
 
   drawCount()
 }
-
+drawAll()
 setInterval(addPerSecond, 1000);
