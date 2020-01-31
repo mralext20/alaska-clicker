@@ -63,9 +63,30 @@ function clickFlag() {
   drawCount();
 }
 
+
+let buttons = {
+  moose: document.getElementById('moose-button'),
+  bear: document.getElementById('bear-button'),
+  floatPlane: document.getElementById('floatPlane-button'),
+  village: document.getElementById('villages-button')
+}
+
+function updateButtons() {
+  for (const [key, value] of Object.entries(buttons)) {
+    if (avalibleUpgrades[key].cost > alaskas) {
+      value.disabled = true
+    } else {
+      value.disabled = false
+    }
+  }
+
+}
+
+
 function drawCount() {
   document.getElementById('cookieCount').textContent = alaskas.toString();
   upgradeSpans.aps.textContent = aps.toString()
+  updateButtons()
 }
 
 let upgradeSpans = {
