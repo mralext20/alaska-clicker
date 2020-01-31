@@ -84,7 +84,7 @@ function updateButtons() {
 
 
 function drawCount() {
-  document.getElementById('cookieCount').textContent = alaskas.toString();
+  document.getElementById('cookieCount').textContent = alaskas.toFixed(1);
   upgradeSpans.aps.textContent = aps.toString()
   updateButtons()
 }
@@ -104,8 +104,8 @@ function drawUpgrades() {
   upgradeSpans.bear.textContent = obtainedUpgrades.bear.toString();
   upgradeSpans.floatPlanes.textContent = obtainedUpgrades.floatPlane.toString();
   upgradeSpans.villages.textContent = obtainedUpgrades.village.toString();
-  upgradeSpans.apc.textContent = apc.toString()
-  upgradeSpans.aps.textContent = aps.toString()
+  upgradeSpans.apc.textContent = apc.toFixed(1)
+  upgradeSpans.aps.textContent = aps.toFixed(1)
 
 }
 
