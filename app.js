@@ -9,25 +9,29 @@ let avalibleUpgrades = {
     name: 'Moose',
     type: 'clickModifier',
     effect: 1,
-    baseCost: 15
+    baseCost: 15,
+    cost: 15
   },
   bear: {
     name: 'bear',
     type: 'clickModifier',
     effect: 5,
-    baseCost: 100
+    baseCost: 100,
+    cost: 100
   },
   floatPlane: {
     name: 'Float Plane',
     type: 'autoClicker',
     effect: 1,
-    baseCost: 30
+    baseCost: 30,
+    cost: 30
   },
   village: {
     name: 'Village',
     type: 'autoClicker',
     effect: 5,
-    baseCost: 50
+    baseCost: 50,
+    cost: 50
   }
 }
 
@@ -44,19 +48,24 @@ function buyUpgrade(upgradeType) {
     return
   }
   obtainedUpgrades[upgradeType]++
-  if (upgrade.type == 'autoClicker') {
+  alaskas -= upgrade.cost
+  upgrade.cost = Math.floor(upgrade.baseCost * (obtainedUpgrades[upgradeType] * .05 + 1));
+  if (upgrade.type == 'clickModifier') {
 
-  }
+    apc += upgrade.effect;
+  };
+  drawAll()
 }
 
 
 function clickFlag() {
-  alaskas += aps;
+  alaskas += apc;
   drawCount();
 }
 
 function drawCount() {
   document.getElementById('cookieCount').textContent = alaskas.toString();
+  upgradeSpans.aps.textContent = aps.toString()
 }
 
 let upgradeSpans = {
@@ -79,15 +88,22 @@ function drawUpgrades() {
 
 }
 
+function drawAll() {
+  drawUpgrades()
+  drawCount()
+}
 
+let lastCookies = 0;
 function addPerSecond() {
-
   for (const [key, value] of Object.entries(obtainedUpgrades)) {
     let upgrade = avalibleUpgrades[key]
     if (upgrade.type == 'autoClicker') {
-      alaskas += upgrade.effect
+      alaskas += upgrade.effect * value;
     }
   }
+  aps = alaskas - lastCookies;
+  lastCookies = alaskas
+
   drawCount()
 }
 
