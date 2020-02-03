@@ -85,7 +85,7 @@ function updateButtons() {
 
 function drawCount() {
   document.getElementById('cookieCount').textContent = alaskas.toFixed(1);
-  upgradeSpans.aps.textContent = aps.toString()
+  upgradeSpans.aps.textContent = aps.toFixed(1)
   updateButtons()
 }
 
